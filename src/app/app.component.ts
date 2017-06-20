@@ -1,19 +1,8 @@
 import { Component } from '@angular/core';
+import { OnInit } from '@angular/core';
+
 import { Hero } from './hero';
-
-const HEROES: Hero[] = [
-  { id: 11, name: 'Mr. Nice' },
-  { id: 12, name: 'Narco' },
-  { id: 13, name: 'Bombasto' },
-  { id: 14, name: 'Celeritas' },
-  { id: 15, name: 'Magneta' },
-  { id: 16, name: 'RubberMan' },
-  { id: 17, name: 'Dynama' },
-  { id: 18, name: 'Dr IQ' },
-  { id: 19, name: 'Magma' },
-  { id: 20, name: 'Tornado' }
-];
-
+import { HeroService } from './hero.service';
 
 // you must import the Component symbol from @angular/core when defining a component
 // the decorator @Component provides access to the Angular metadata
@@ -21,21 +10,24 @@ const HEROES: Hero[] = [
 // double curly braces {{object.property}} (one-way data binding) are Angular's interpolation binding syntax
 // [(ngModel)] directive is the Angular syntax for two-way data binding
 // The backticks designate a template literal a feature of ES2015
-// The (*) prefix to ngFor indicates that the <li> element and its children constitute a master template.
-// The ngFor directive iterates over the component's heroes array and renders an instance of this template for each hero in that array. 
+// The '*' prefix to ngFor indicates that the <li> element and its children constitute a master template.
+// The ngFor directive iterates over the component's heroes array and renders an instance of this template for each hero in that array.
+// To bind to a DOM event i.e. click surround the event with parens () and assign it a quoted template statement. To pass the entire payload of the event pass the $event object to the handler
+
 @Component({
-  selector: 'my-app',
-  template: `
-     <h1>{{title}}</h1>
-     <h2>My Heroes</h2>
-     <ul class="heroes">
-        <li *ngFor="let hero of heroes"
-           [class.selected]="hero===selectedHero"
-           (click)="onSelect(hero)">
-              <span class="badge">{{hero.id}}</span> {{hero.name}}
-        </li>
-     </ul>
-	 <hero-detail [hero]="selectedHero"></hero-detail>
+   selector: 'my-app',
+   providers: [HeroService],
+   template: `
+      <h1>{{title}}</h1>
+      <h2>My Heroes</h2>
+      <ul class="heroes">
+         <li *ngFor="let hero of heroes"
+            [class.selected]="hero===selectedHero"
+            (click)="onSelect(hero)">
+               <span class="badge">{{hero.id}}</span> {{hero.name}}
+         </li>
+      </ul>
+      <hero-detail [hero]="selectedHero"></hero-detail>
 `,
 styles: [`
   .selected {
@@ -88,12 +80,21 @@ styles: [`
 `]
 })
 
-
-export class AppComponent
-{ 
+export class AppComponent implements OnInit { 
    title = 'Tour of Heros';
-   heroes = HEROES;
+   heroes : Hero[];
    selectedHero: Hero;
+   
+   constructor(private heroService: HeroService) {}
+   
+   ngOnInit(): void {
+      this.getHeroes();
+   }
+   
+   getHeroes(): void {
+     console.log("in AppComponent.getHeroes");
+     this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+   }
    
    onSelect(hero: Hero): void {
        this.selectedHero = hero;
