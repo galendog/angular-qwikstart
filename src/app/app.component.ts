@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Hero } from './hero';
 
 const HEROES: Hero[] = [
   { id: 11, name: 'Mr. Nice' },
@@ -13,6 +14,10 @@ const HEROES: Hero[] = [
   { id: 20, name: 'Tornado' }
 ];
 
+
+// you must import the Component symbol from @angular/core when defining a component
+// the decorator @Component provides access to the Angular metadata
+// the name in the CSS selector element must match  
 // double curly braces {{object.property}} (one-way data binding) are Angular's interpolation binding syntax
 // [(ngModel)] directive is the Angular syntax for two-way data binding
 // The backticks designate a template literal a feature of ES2015
@@ -30,14 +35,7 @@ const HEROES: Hero[] = [
               <span class="badge">{{hero.id}}</span> {{hero.name}}
         </li>
      </ul>
-     <div *ngIf="selectedHero">
-        <h2>{{selectedHero.name}} details!</h2>
-        <div><label>id: </label>{{selectedHero.id}}</div>
-        <div>
-           <label>name: </label>
-           <input [(ngModel)]="selectedHero.name" placeholder="name"/>
-        </div>
-     </div>     
+	 <hero-detail [hero]="selectedHero"></hero-detail>
 `,
 styles: [`
   .selected {
@@ -100,9 +98,4 @@ export class AppComponent
    onSelect(hero: Hero): void {
        this.selectedHero = hero;
    }
-}
-
-export class Hero {
-    id: number;
-    name: string;
 }
