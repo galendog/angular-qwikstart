@@ -5,16 +5,22 @@ import { FormsModule }   from '@angular/forms'; // <-- NgModule lives here
 
 // every component must be declared in one and only one module
 import { AppComponent }  from './app.component';
-import { HeroDetailComponent } from './hero-detail.component'
+import { HeroDetailComponent } from './hero-detail.component';
+import { HeroesComponent } from './heroes.component';
+import { HeroService } from './hero.service';
 
 @NgModule({
    imports:      [ 
       BrowserModule,
-	  FormsModule  // <-- import the FormsModule before binding with [(ngModel)]
+      FormsModule  // <-- import the FormsModule before binding with [(ngModel)]
    ],
    declarations: [ 
       AppComponent,
-	  HeroDetailComponent
+      HeroesComponent,
+      HeroDetailComponent
+   ],
+   providers: [
+      HeroService
    ],
    bootstrap:    [ 
       AppComponent 
