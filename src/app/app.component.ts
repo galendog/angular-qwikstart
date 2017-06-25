@@ -17,7 +17,6 @@ import { Component } from '@angular/core';
     `
 })
 
-
 export class AppComponent {
    name = 'Angular';
    title = 'Tour of Heros';
