@@ -90,7 +90,6 @@ styles: [`
 `]
 })
 
-
 export class AppComponent {
    title = 'Tour of Heros';
    heroes = HEROES;
