@@ -7,8 +7,12 @@ import { HEROES } from './mock-heroes'
 // which may envolve injecting other dependencies into this service
 @Injectable()
 export class HeroService {
-   getHeroes() : Promise<Hero[]> {
-	   return Promise.resolve(HEROES);
+   getHeroes(): Promise<Hero[]> {
+      return Promise.resolve(HEROES);
+    }
+
+   getHero(id: number): Promise<Hero> {
+       return this.getHeroes()
+          .then(heroes => heroes.find(hero => hero.id === id));
    }
 }
-	
