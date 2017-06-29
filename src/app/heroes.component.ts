@@ -4,26 +4,32 @@ import { Router } from '@angular/router';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
 
+// Angular Cheatsheet
+//    https://angular.io/guide/cheatsheet
+
+
 // you must import the Component symbol from @angular/core when defining a component
-// the decorator @Component provides access to the Angular metadata
 // the name in the CSS selector element must match  
 // double curly braces {{object.property}} (one-way data binding) are Angular's interpolation binding syntax
 // [(ngModel)] directive is the Angular syntax for two-way data binding
 // The backticks designate a template literal a feature of ES2015
-// The '*' prefix to ngFor indicates that the <li> element and its children constitute a master template.
+// The '*' prefix to ngFor directive indicates that the <li> element and its children constitute a master template.
 // The ngFor directive iterates over the component's heroes array and renders an instance of this template for each hero in that array. 
 // To bind to a DOM event i.e. click surround the event with parens () and assign it a quoted template statement. To pass the entire payload of the event pass the $event object to the handler 
-
 @Component({
    selector: 'my-heroes',
    templateUrl: './heroes.component.html',
    styleUrls: [ './heroes.component.css' ]
 })
 
+
+// the decorator @Component provides access to the Angular metadata which identifies the javascript class HeroesComponent as a Angular component
+// component classes should expose properites and methods for databinding, all other application logic should be delegated to a service and made available via dependency injection
 export class HeroesComponent implements OnInit { 
    heroes : Hero[];
    selectedHero: Hero;
 
+// Both the HeroService and Router are made available by way of exposing these as private parmaters to its ctor aka dependency injection
    constructor(
       private heroService: HeroService,
       private router: Router) { }

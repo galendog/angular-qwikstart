@@ -1,4 +1,4 @@
-﻿<h2>My Heroes</h2>
+<h2>My Heroes</h2>
 <ul class="heroes">
     <li *ngFor="let hero of heroes"
         [class.selected]="hero===selectedHero"
@@ -12,3 +12,29 @@
     </h2>
     <button (click)="gotoDetail()">View Details</button>
 </div>
+<!--
+The above HTML snippet is an Angular Template. Angular using data binding one-way/two-way via component associated with this template to change the UI
+The syntax for Angular Templates can be found here https://angular.io/guide/template-syntax
+
+Template expressions are evaluated and converted to strings if necessary afterwhich they are bound to a binding target i.e.  HTML element, property of a component or Angular directive
+
+Template statements responds to an event raised by binding targets
+
+Template's context includes template variables, the directives context object (if there is one) and the component. Angular will use the order just specified to resolve names to evaluate
+
+Angular provides 4 different methods for data binding
+
+    These two flow from the component to the element
+    1 Interpolation {{value}} suchs as {{hero.id}} above
+    2 Property binding [prop]="value" i.e. [hero]="selectedHero"
+
+    This flows from the element to the component
+    3 Event binding (event)="handler" such as the (click)="onSelect(hereo)" above
+
+    Both directions
+    4 2-way databinding [(ng-model)]="prop" this combindes property and event binding into a single notiation i.e. <input [(ngModel)]="hero.name">
+
+Angular provides a number of different directives @Component is one
+    1) Structual alter the template layout by adding, removing, replacing elements in the DOM i.e. *ngFor, *ngIf
+    2) Attrubute alter the appearance or behavior of an existing elementi.e. ngModel
+ -->
