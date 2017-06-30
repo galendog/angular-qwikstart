@@ -7,36 +7,23 @@ export class InMemoryDataService implements InMemoryDbService {
     createDb() {
         console.log("In InMemoryDataService.createDb");
 
-        // Aren't javascript objects equvalent to JSON??? I can't return a Hero[] without an error occuring when HTTP response is converted to JSON
-        //const HEROES: Hero[] = [
-        //    { id: 0, name: 'Zero' },
-        //    { id: 11, name: 'Mr. Nice' },
-        //    { id: 12, name: 'Narco' },
-        //    { id: 13, name: 'Bombasto' },
-        //    { id: 14, name: 'Celeritas' },
-        //    { id: 15, name: 'Magneta' },
-        //    { id: 16, name: 'RubberMan' },
-        //    { id: 17, name: 'Dynama' },
-        //    { id: 18, name: 'Dr IQ' },
-        //    { id: 19, name: 'Magma' },
-        //    { id: 20, name: 'Tornado' }
-        //];
-
-        //return { HEROES };
-
-        const heroes = [
-            { id: 0, name: 'Zero' },
-            { id: 11, name: 'Mr. Nice' },
-            { id: 12, name: 'Narco' },
-            { id: 13, name: 'Bombasto' },
-            { id: 14, name: 'Celeritas' },
-            { id: 15, name: 'Magneta' },
-            { id: 16, name: 'RubberMan' },
-            { id: 17, name: 'Dynama' },
-            { id: 18, name: 'Dr IQ' },
-            { id: 19, name: 'Magma' },
-            { id: 20, name: 'Tornado' }
+        const heroes: Hero[] = [
+            { id: 0, name: 'zero' },
+            { id: 11, name: 'mr. nice' },
+            { id: 12, name: 'narco' },
+            { id: 13, name: 'bombasto' },
+            { id: 14, name: 'celeritas' },
+            { id: 15, name: 'magneta' },
+            { id: 16, name: 'rubberman' },
+            { id: 17, name: 'dynama' },
+            { id: 18, name: 'dr iq' },
+            { id: 19, name: 'magma' },
+            { id: 20, name: 'tornado' }
         ];
-        return { heroes };
+
+        console.log("These are the heroes", JSON.stringify({ heroes }));
+
+        // NOTE the curly braces are required in order to form the JSON object {heroes: [...]}
+         return { heroes };
     }
 }

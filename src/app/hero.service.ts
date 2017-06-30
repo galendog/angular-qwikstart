@@ -10,6 +10,7 @@ import { Hero } from './hero';
 @Injectable()
 export class HeroService {
    private heroesUrl = 'api/heroes';
+   private headers = new Headers({ 'ContentType': 'application/json' });
 
    constructor(private http: Http) { }
 
@@ -22,12 +23,42 @@ export class HeroService {
     }
 
    getHero(id: number): Promise<Hero> {
-      const url = `${this.heroesUrl}/${id}`;
+      const heroUrlbyId = `${this.heroesUrl}/${id}`;
 
-      console.log("In getHero making HTTP request: ", url);
-      return this.http.get(url)
+      console.log("In getHero making HTTP request: ", heroUrlbyId);
+      return this.http.get(heroUrlbyId)
          .toPromise()
          .then(response => response.json().data as Hero)
+         .catch(this.handleError);
+   }
+
+   updateHero(hero: Hero): Promise<Hero> {
+       const heroUrlEdit = `${this.heroesUrl}/${hero.id}`;
+
+       console.log("In updateHero making HTTP request: ", heroUrlEdit);
+       //return Promise.resolve<void>(null);
+       return this.http.put(heroUrlEdit, JSON.stringify(hero), { headers: this.headers })
+          .toPromise()
+          .then(() => hero)
+          .catch(this.handleError);
+   }
+
+   createHero(name: string): Promise<Hero> {
+
+      console.log("In createHero making HTTP request: ");
+      return this.http.post(this.heroesUrl, JSON.stringify({ name: name }), { headers: this.headers })
+         .toPromise()
+         .then(res => res.json().data as Hero)
+         .catch(this.handleError);
+   }
+
+   deleteHero(id: number): Promise<void> {
+      const heroUrlDelete = `${this.heroesUrl}/${id}`;
+
+      console.log("In deleteHero making HTTP request: ", heroUrlDelete);
+      return this.http.delete(heroUrlDelete, { headers: this.headers })
+         .toPromise()
+         .then(() => null)
          .catch(this.handleError);
    }
 
