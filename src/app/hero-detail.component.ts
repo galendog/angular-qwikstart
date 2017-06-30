@@ -15,22 +15,28 @@ import { HeroService } from './hero.service';
 
 export class HeroDetailComponent implements OnInit {
 
-    hero: Hero;
+   hero: Hero;
 
-    constructor(
-        private heroService: HeroService,
-        private route: ActivatedRoute,
-        private location: Location
-    ) { }
+   constructor(
+      private heroService: HeroService,
+      private route: ActivatedRoute,
+      private location: Location
+   ) { }
 
-    ngOnInit(): void {
-        console.log("in HeroDetailComponent.ngOnInit");
-        this.route.params
-            .switchMap((params: Params) => this.heroService.getHero(+params['id']))
-            .subscribe(hero => this.hero = hero);
-    }
+   ngOnInit(): void {
+      console.log("in HeroDetailComponent.ngOnInit");
+      this.route.params
+         .switchMap((params: Params) => this.heroService.getHero(+params['id']))
+         .subscribe(hero => this.hero = hero);
+   }
 
-    goBack(): void {
-        this.location.back();
+   goBack(): void {
+      this.location.back();
+   }
+
+   save(): void {
+      console.log("in HeroDetailComponent.save update is", this.hero);
+      this.heroService.updateHero(this.hero)
+      .then(() => this.goBack());
     }
 }
