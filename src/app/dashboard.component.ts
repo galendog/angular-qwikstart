@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
     constructor(private heroService: HeroService) { }
 
     ngOnInit(): void {
+        console.log("In DashboardComponent.ngOnInit calling HeroService.getHeroes()");
         this.heroService.getHeroes()
             .then(heroes => this.heroes = heroes.slice(1, 5));
     }

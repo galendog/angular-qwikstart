@@ -15,7 +15,7 @@ export class HeroService {
    constructor(private http: Http) { }
 
    getHeroes(): Promise<Hero[]> {
-      console.log("In getHeroes making HTTP request: ", this.heroesUrl);
+      console.log("In HeroService.getHeroes making HTTP request: ", this.heroesUrl);
       return this.http.get(this.heroesUrl)
          .toPromise()
          .then(response => response.json().data as Hero[])
@@ -25,7 +25,7 @@ export class HeroService {
    getHero(id: number): Promise<Hero> {
       const heroUrlbyId = `${this.heroesUrl}/${id}`;
 
-      console.log("In getHero making HTTP request: ", heroUrlbyId);
+      console.log("In HeroService.getHero making HTTP request: ", heroUrlbyId);
       return this.http.get(heroUrlbyId)
          .toPromise()
          .then(response => response.json().data as Hero)
@@ -35,7 +35,7 @@ export class HeroService {
    updateHero(hero: Hero): Promise<Hero> {
        const heroUrlEdit = `${this.heroesUrl}/${hero.id}`;
 
-       console.log("In updateHero making HTTP request: ", heroUrlEdit);
+       console.log("In HeroService.updateHero making HTTP request: ", heroUrlEdit);
        //return Promise.resolve<void>(null);
        return this.http.put(heroUrlEdit, JSON.stringify(hero), { headers: this.headers })
           .toPromise()
@@ -45,7 +45,7 @@ export class HeroService {
 
    createHero(name: string): Promise<Hero> {
 
-      console.log("In createHero making HTTP request: ");
+      console.log("In HeroService.createHero making HTTP request: ");
       return this.http.post(this.heroesUrl, JSON.stringify({ name: name }), { headers: this.headers })
          .toPromise()
          .then(res => res.json().data as Hero)
@@ -55,7 +55,7 @@ export class HeroService {
    deleteHero(id: number): Promise<void> {
       const heroUrlDelete = `${this.heroesUrl}/${id}`;
 
-      console.log("In deleteHero making HTTP request: ", heroUrlDelete);
+      console.log("In HeroService.deleteHero making HTTP request: ", heroUrlDelete);
       return this.http.delete(heroUrlDelete, { headers: this.headers })
          .toPromise()
          .then(() => null)
@@ -63,7 +63,7 @@ export class HeroService {
    }
 
    private handleError(error: any): Promise<any> {
-      console.error('An error occurred', error);
+      console.error('In HeroService an error occurred', error);
       return Promise.reject(error.message || error);
    }
 }
